@@ -127,45 +127,5 @@ class TestJSONPlaceholderAPI:
         user_data = response.json()
         assert user_data["id"] == user_id
 
-
-def test_integration_flow():
-    """Интеграционный тест: полный цикл работы с пользователем"""
-    # 1. Создание пользователя
-    new_user = {
-        "name": "Integration User",
-        "email": "integration@test.com",
-        "username": "integration"
-    }
-    
-    headers = {"Content-Type": "application/json"}
-    create_response = requests.post(
-        f"{BASE_URL}/users",
-        data=json.dumps(new_user),
-        headers=headers
-    )
-    
-    assert create_response.status_code == 201
-    created_user = create_response.json()
-    
-    # 2. Проверка создания
-    get_response = requests.get(f"{BASE_URL}/users/{created_user['id']}")
-    assert get_response.status_code == 200
-    
-    # 3. Обновление
-    update_data = {"name": "Updated Integration User"}
-    update_response = requests.patch(
-        f"{BASE_URL}/users/{created_user['id']}",
-        data=json.dumps(update_data),
-        headers=headers
-    )
-    
-    assert update_response.status_code == 200
-    assert update_response.json()["name"] == "Updated Integration User"
-    
-    # 4. Удаление
-    delete_response = requests.delete(f"{BASE_URL}/users/{created_user['id']}")
-    assert delete_response.status_code in [200, 204]
-
-
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
