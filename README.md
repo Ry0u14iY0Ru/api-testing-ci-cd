@@ -22,5 +22,5 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/ваш-username/api-testing-ci-cd.git
+git clone https://github.com/Ry0u14iY0Ru/api-testing-ci-cd.git
 cd api-testing-ci-cd
